@@ -1,3 +1,38 @@
+export type CampaignId = 'zhenguan' | 'kaiyuan';
+
+export interface CampaignInfo {
+  id: CampaignId;
+  title: string;
+  period: string;
+  subtitle: string;
+  emperor: string;
+  director: string;
+  intro: string;
+  focus: string;
+  badge: string;
+}
+
+export interface EndingDefinition {
+  id: string;
+  title: string;
+  honorific: string;
+  category: 'legend' | 'loyalist' | 'hermit' | 'exile' | 'villain' | 'martyr' | 'paragon' | 'commoner';
+  summary: string;
+  poem: string;
+  historicalLegacy: string;
+  verdict: string;
+  recommendedCampaign?: CampaignId;
+  conditionHint: string;
+}
+
+export interface UnlockedEndingRecord {
+  endingId: string;
+  unlockedAt: string;
+  campaignId: CampaignId;
+  finalRank: string;
+  finalStats: EmpireState;
+}
+
 export type OfficialRank = {
   title: string;
   grade: string;
@@ -40,6 +75,7 @@ export interface Constellation {
 
 export interface AstrologicalAnomaly {
   id: string;
+  campaignId: CampaignId;
   title: string;
   yearName: string; // 年号，如 "开元三年 孟秋"
   season: string;

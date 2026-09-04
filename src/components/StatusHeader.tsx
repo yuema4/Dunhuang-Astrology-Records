@@ -1,26 +1,34 @@
 import React from 'react';
-import { EmpireState, OfficialRank } from '../types/game';
-import { Crown, Shield, Users, Award, BookOpen, Lightbulb, History, RotateCcw } from 'lucide-react';
+import { EmpireState, OfficialRank, CampaignInfo } from '../types/game';
+import { Crown, Shield, Users, Award, BookOpen, Lightbulb, History, RotateCcw, Compass, Trophy } from 'lucide-react';
 
 interface StatusHeaderProps {
   empireState: EmpireState;
   currentRank: OfficialRank;
+  campaign: CampaignInfo;
   yearName: string;
   season: string;
+  unlockedEndingsCount: number;
   onOpenCodex: () => void;
   onOpenIdeas: () => void;
   onOpenChronicle: () => void;
+  onOpenCampaignSelect: () => void;
+  onOpenEndingGallery: () => void;
   onResetGame: () => void;
 }
 
 export const StatusHeader: React.FC<StatusHeaderProps> = ({
   empireState,
   currentRank,
+  campaign,
   yearName,
   season,
+  unlockedEndingsCount,
   onOpenCodex,
   onOpenIdeas,
   onOpenChronicle,
+  onOpenCampaignSelect,
+  onOpenEndingGallery,
   onResetGame,
 }) => {
   // Helper for 5-segment modular bars as in Immersive UI
@@ -47,24 +55,35 @@ export const StatusHeader: React.FC<StatusHeaderProps> = ({
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         {/* Left: Rotated Diamond Crest, Title & Subtitle from Immersive UI */}
         <div className="flex items-center justify-between sm:justify-start gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3.5">
             {/* Diamond Crest Emblem */}
             <div className="w-10 h-10 border border-[#d4af37] rotate-45 flex items-center justify-center bg-[#05050a] shadow-[0_0_12px_rgba(212,175,55,0.25)] shrink-0">
               <span className="-rotate-45 font-bold text-lg text-[#d4af37]">唐</span>
             </div>
 
             <div className="flex flex-col">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="text-lg sm:text-xl font-semibold tracking-widest text-[#f5ebd7]">
                   大唐司天监 · 敦煌星占
                 </h1>
-                <span className="text-[11px] px-2 py-0.5 rounded border border-[#3d2b1f] bg-[#121212] text-[#d4af37]">
+                {/* Campaign Switcher Pill */}
+                <button
+                  onClick={onOpenCampaignSelect}
+                  title="点击切换历史剧本"
+                  className="flex items-center gap-1 text-[11px] px-2 py-0.5 rounded border border-[#d4af37]/40 bg-[#121218] hover:bg-[#d4af37]/15 text-[#d4af37] transition cursor-pointer"
+                >
+                  <Compass className="w-3 h-3 text-[#d4af37]" />
+                  <span>{campaign.title}</span>
+                  <span className="text-[10px] text-[#8a7a5f]">▾</span>
+                </button>
+                <span className="text-[11px] px-2 py-0.5 rounded border border-[#3d2b1f] bg-[#05050a] text-[#c4b59d]">
                   {yearName} · {season}
                 </span>
               </div>
               <p className="text-[10px] text-[#8a7a5f] uppercase tracking-tighter">
-                Directorate of Astronomy - Imperial Star Observation · 官秩：
+                {campaign.period} · 官秩：
                 <span className="text-[#c4b59d] font-semibold">{currentRank.title}</span>
+                （{currentRank.grade}）
               </p>
             </div>
           </div>
@@ -123,6 +142,18 @@ export const StatusHeader: React.FC<StatusHeaderProps> = ({
 
         {/* Right: Actions Styled to Match Immersive UI */}
         <div className="flex items-center gap-2 flex-wrap">
+          {/* Ending Gallery Button */}
+          <button
+            onClick={onOpenEndingGallery}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#3d2b1f] hover:border-[#d4af37] hover:bg-[#d4af37]/10 text-xs text-[#c4b59d] hover:text-[#d4af37] transition shadow-sm"
+          >
+            <Trophy className="w-3.5 h-3.5 text-[#d4af37]" />
+            <span>结局鉴</span>
+            <span className="text-[10px] px-1 py-0.2 rounded bg-[#05050a] border border-[#3d2b1f] text-[#d4af37]">
+              {unlockedEndingsCount}
+            </span>
+          </button>
+
           <button
             onClick={onOpenCodex}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#3d2b1f] hover:border-[#d4af37] hover:bg-[#d4af37]/10 text-xs text-[#c4b59d] hover:text-[#d4af37] transition shadow-sm"
