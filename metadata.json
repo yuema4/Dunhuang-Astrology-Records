@@ -1,0 +1,6 @@
+{
+  "name": "司天监：敦煌星占录",
+  "description": "唐代司天监星占推衍小游戏。夜观敦煌星图二十八宿异象，批拟密奏断国运兴衰，于朝堂风云与天命之间抉择。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&display=swap');
+
+:root {
+  --color-gold: #d4af37;
+  --color-border: #3d2b1f;
+  --color-bg-dark: #05050a;
+}
+
+body {
+  margin: 0;
+  background-color: #05050a;
+  color: #d4af37;
+  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  overflow-x: hidden;
+}
+
+.chinese-font {
+  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+}
+
+.star-map {
+  background: radial-gradient(circle at center, #1a1b3a 0%, #05050a 100%);
+  border: 2px solid #3d2b1f;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.85);
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #fff, 0 0 8px #d4af37;
+}
+
+.constellation-line {
+  position: absolute;
+  background: rgba(212, 175, 55, 0.25);
+  height: 1px;
+  transform-origin: left center;
+}
+
+.panel-silk {
+  background-color: #121212;
+  border: 1px solid #3d2b1f;
+  position: relative;
+}
+
+.panel-silk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+  pointer-events: none;
+}
+
+.ink-border {
+  border-image: linear-gradient(to bottom, #d4af37, #3d2b1f) 1;
+}
+
+/* Custom Bronze/Gold Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #3d2b1f;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
